@@ -12,12 +12,8 @@ Tag.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    product_id: {
-      tag_name: DataTypes.String,
-      references: {
-        model: "product",
-        key: "id",
-      },
+    tag_name: {
+      type: DataTypes.STRING,
     },
   },
 
