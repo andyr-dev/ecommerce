@@ -1,5 +1,5 @@
 # eCommerce Inventory
-![](assets/screenshot.png)
+![](./assets/screenshot.png)
 [Link To Walkthrough](https://drive.google.com/file/d/13cIA5DNX0C20Sw6dNkPwhLhgiSQB47Nk/view)
   
   ![MIT License](https://img.shields.io/badge/license-MIT-blueviolet)
