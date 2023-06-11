@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
     });
 
     if (!productData) {
-      res.status(404).json({ message: "No product found with this id!" });
+      res.status(404).json({ message: "No product found with this ID" });
       return;
     }
 
@@ -114,7 +114,7 @@ router.delete("/:id", async (req, res) => {
     if (!productData) {
       res
         .status(400)
-        .json({ message: `No product with id ${req.params.id} was found.` });
+        .json({ message: `No product found with this ID` });
       return;
     }
     await productData.destroy();

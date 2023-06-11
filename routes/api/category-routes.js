@@ -63,7 +63,7 @@ router.delete("/:id", async (req, res) => {
     if (!categoryData) {
       res
         .status(400)
-        .json({ message: `No product with id ${req.params.id} was found.` });
+        .json({ message: `No category found with this ID` });
       return;
     }
     await categoryData.destroy();
