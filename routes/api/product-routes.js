@@ -1,26 +1,23 @@
-const router = require('express').Router();
-const { Product, Category, Tag, ProductTag } = require('../../models');
+const router = require("express").Router();
+const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const productData = await Product.findAll({include: [
-      {model: Category},
-      {model: Tag},
-    ],
-  });
+    const productData = await Product.findAll({
+      include: [{ model: Category }, { model: Tag }],
+    });
     res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
 router.get("/:id", async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
-      include: [{ model: Category }, { model: Tag}],
+      include: [{ model: Category }, { model: Tag }],
     });
 
     if (!productData) {
@@ -34,10 +31,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
-
 // create new product
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -48,6 +43,8 @@ router.post('/', (req, res) => {
   */
   Product.create(req.body)
     .then((product) => {
+      console.log(req.body);
+
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -69,7 +66,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -110,7 +107,6 @@ router.put('/:id', (req, res) => {
     });
 });
 
-
 router.delete("/:id", async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id);
@@ -126,7 +122,9 @@ router.delete("/:id", async (req, res) => {
     res.status(200).json({ message: `Product successfully deleted.` });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: `Error deleting product data on db.`, err });
+    res
+      .status(500)
+      .json({ message: `Error deleting product data on db.`, err });
   }
 });
 

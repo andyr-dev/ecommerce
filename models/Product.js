@@ -31,8 +31,12 @@ Product.init(
       allowNull: false,
       defaultValue: 10,
       validate: {
-        isInteger: true,
-      },
+        isInteger: function(value) {
+          if (!Number.isInteger(value)) {
+            throw new Error('The stock value must be an integer.');
+      }
+    }
+    },
     },
     category_id: {
       type: DataTypes.INTEGER,
@@ -42,6 +46,7 @@ Product.init(
       },
     },
   },
+
   {
     sequelize,
     timestamps: false,
